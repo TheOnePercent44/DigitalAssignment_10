@@ -28,7 +28,7 @@ var LOCS, index;
 var layer, map, leftKey, rightKey, spaceKey, upKey, downKey, aKey, sKey, dKey, wKey;
 var player, baddies, bulletgroup;
 var timeMark, dirFlag, portMark;
-var ENEMYSPEED, isShooting, text1, text2;
+var ENEMYSPEED, isShooting, text1, text2, gameover;
 Lottery.Game.prototype = {
     create: function () {
 	////Initialize/////////////////////////////////////////////////////////////////////////////////////
@@ -66,7 +66,7 @@ Lottery.Game.prototype = {
 		
 		baddies = this.game.add.group();
 		baddies.enableBody = true;
-		for(var i = 0; i < 25; i++)//25 enemies randomly on the map somewhere
+		for(var i = 0; i < 10; i++)//25 enemies randomly on the map somewhere
 		{
 			baddies.add(newEnemy(this.game));
 		}
@@ -84,8 +84,12 @@ Lottery.Game.prototype = {
 		this.game.physics.arcade.overlap(bulletgroup, layer, bulletKill, null, this);
 		this.game.physics.arcade.collide(baddies, layer);//COLLIDE
 		this.game.physics.arcade.collide(player.sprite, layer);
-		this.game.physics.arcade.collide(baddies, player.sprite, player.kill, null, player);
+		gameover = this.game.physics.arcade.overlap(baddies, player.sprite, player.kill, null, player);
 		
+		if(gameover)
+		{
+			//lose?
+		}
 		text1.text = "Ammunition: " + player.getShots();
 		text2.text = "Enemies: " + baddies.countLiving();
 	////Input Handlers/////////////////////////////////////////////////////////////////////////////////	
@@ -226,6 +230,12 @@ function teleport(game)
 	index = game.rnd.integerInRange(1, LOCS)-1;
 	player.sprite.x = xlocs[index];
 	player.sprite.y = ylocs[index];
+	while(game.physics.arcade.overlap(player, baddies))//game.physics.arcade.collide(hume, layer) || 
+	{
+		index = game.rnd.integerInRange(1, LOCS)-1;
+		player.sprite.x = xlocs[index];
+		player.sprite.y = ylocs[index];
+	}
 };
 
 function EnemyDie(playerbullet, enemysprite)

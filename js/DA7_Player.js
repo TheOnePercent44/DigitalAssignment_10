@@ -14,9 +14,13 @@ function newPlayer(game, xcoord, ycoord)
 	this.inAir = false;
     this.JUMP_SPEED = -175; // pixels/second (negative y is up)*/
 	
-	this.idle = function()
+	this.idleX = function()
 	{
 		this.sprite.body.acceleration.x = 0;
+	}
+	this.idleY = function()
+	{
+		this.sprite.body.acceleration.y = 0;
 	}
 	
 	this.moveRight = function()
@@ -78,11 +82,11 @@ function newPlayer(game, xcoord, ycoord)
 		}
 	}
 	
-	/*this.kill = function(playersprite, bulletsprite)
+	this.kill = function(playersprite, enemysprite)
 	{
-		bulletsprite.kill();
+		enemysprite.kill();
 		this.sprite.kill();
-	}*/
+	}
 	
 	return this;
 };

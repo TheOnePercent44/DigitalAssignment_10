@@ -28,7 +28,7 @@ var LOCS, index;
 var layer, map, leftKey, rightKey, spaceKey, upKey, downKey, aKey, sKey, dKey, wKey;
 var player, baddies, bulletgroup;
 var timeMark, dirFlag, portMark;
-var ENEMYSPEED, isShooting, text1, text2, gameover, teleporting;
+var ENEMYSPEED, isShooting, text1, text2, gameover, teleporting, repulseCD, canRepulse;
 Lottery.Game.prototype = {
     create: function () {
 	////Initialize/////////////////////////////////////////////////////////////////////////////////////
@@ -40,6 +40,7 @@ Lottery.Game.prototype = {
 		text1 = this.game.add.text(15*32, 0, "Ammunition: ", {font: "15px Arial", fill: "#ffffff", align: "left"});
 		text2 = this.game.add.text(10*32, 0, "Enemies: ", {font: "15px Arial", fill: "#ffffff", align: "left"});	
 		teleporting = false;
+		canRepulse = true;
 	///////////////////////////////////////////////////////////////////////////////////////////////////
 		leftKey = this.game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
 		rightKey = this.game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
@@ -95,6 +96,17 @@ Lottery.Game.prototype = {
 		text1.text = "Ammunition: " + player.getShots();
 		text2.text = "Enemies: " + baddies.countLiving();
 	////Input Handlers/////////////////////////////////////////////////////////////////////////////////	
+		if(spaceKey.isDown && canRepulse === true)
+		{
+			canRepulse = false;
+			repulse(this.game);
+			repulseCD = this.game.time.now;
+		}
+		if(canRepulse === false && this.game.time.now-repulseCD > 3000)
+		{
+			canRepulse = true;
+		}
+		
 		if(wKey.isDown)
 		{
 			player.moveUp();
@@ -228,6 +240,21 @@ function EnemyUpdate(enemysprite, game)
 		EnemyDirectionSet(enemysprite, game);
 	}
 };
+
+function repulse(game)
+{
+	baddies.forEachAlive(pushback, game);
+}
+
+function pushback(enemysprite)
+{
+	if(difference(enemysprite.x, player.sprite.x) < 150 || difference(enemysprite.y, player.sprite.y) < 150)
+	{
+		var angle = -anglebetween(enemysprite.x, enemysprite.y, player.sprite.x, player.sprite.y);
+		enemysprite.body.velocity.x = ENEMYSPEED*Math.cos(angle);
+		enemysprite.body.velocity.y = ENEMYSPEED*Math.sin(angle);
+	}
+}
 
 function teleport(game)
 {

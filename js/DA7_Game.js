@@ -155,13 +155,13 @@ Lottery.Game.prototype = {
 			teleport = true;
 			teleport(this.game);
 			portMark = this.game.time.now+this.game.rnd.integerInRange(-1000, 2500);
+			teleporting = false;
 		}
 		baddies.forEachAlive(EnemyUpdate, this, this);//does update with dirFlag either true or false
 		if(dirFlag)
 		{
 			timeMark = this.game.time.now;
 			dirFlag = false;
-			teleporting = false;
 		}
 		if(baddies.countLiving() <= 0 || player.getShots() <= 0)
 		{

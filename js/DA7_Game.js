@@ -152,7 +152,7 @@ Lottery.Game.prototype = {
 		}
 		if(this.game.time.now-portMark > 1750)
 		{
-			teleport = true;
+			teleporting = true;
 			teleport(this.game);
 			portMark = this.game.time.now+this.game.rnd.integerInRange(-1000, 2500);
 			teleporting = false;

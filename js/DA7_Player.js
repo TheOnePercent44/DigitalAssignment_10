@@ -4,7 +4,7 @@ function newPlayer(game, xcoord, ycoord)
 	this.sprite = this.game.add.sprite(xcoord, ycoord, 'yellowBlock');
 	this.BSPEED = 500;
 	this.SHOTS = 30;
-	/*this.game.physics.enable(this.sprite, Phaser.Physics.ARCADE);
+	this.game.physics.enable(this.sprite, Phaser.Physics.ARCADE);
 	this.MAX_SPEED = 500; // pixels/second
     this.ACCELERATION = 1500; // pixels/second/second
     this.DRAG = 500; // pixels/second
@@ -12,7 +12,7 @@ function newPlayer(game, xcoord, ycoord)
 	this.sprite.body.maxVelocity.setTo(this.MAX_SPEED, 0); // x, y
 	this.sprite.body.drag.setTo(this.DRAG, 0); // x, y
 	this.inAir = false;
-    this.JUMP_SPEED = -175; // pixels/second (negative y is up)*/
+    this.JUMP_SPEED = -175; // pixels/second (negative y is up)
 	
 	this.idleX = function()
 	{

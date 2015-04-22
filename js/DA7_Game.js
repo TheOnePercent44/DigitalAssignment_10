@@ -28,7 +28,7 @@ var LOCS, index;
 var layer, map, leftKey, rightKey, spaceKey, upKey, downKey, aKey, sKey, dKey, wKey;
 var player, baddies, bulletgroup;
 var timeMark, dirFlag, portMark;
-var ENEMYSPEED, isShooting, text1, text2, gameover;
+var ENEMYSPEED, isShooting, text1, text2, gameover, teleporting;
 Lottery.Game.prototype = {
     create: function () {
 	////Initialize/////////////////////////////////////////////////////////////////////////////////////
@@ -38,7 +38,8 @@ Lottery.Game.prototype = {
 		ENEMYSPEED = 300;
 		isShooting = false;
 		text1 = this.game.add.text(15*32, 0, "Ammunition: ", {font: "15px Arial", fill: "#ffffff", align: "left"});
-		text2 = this.game.add.text(10*32, 0, "Enemies: ", {font: "15px Arial", fill: "#ffffff", align: "left"});		
+		text2 = this.game.add.text(10*32, 0, "Enemies: ", {font: "15px Arial", fill: "#ffffff", align: "left"});	
+		teleporting = false;
 	///////////////////////////////////////////////////////////////////////////////////////////////////
 		leftKey = this.game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
 		rightKey = this.game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
@@ -84,7 +85,8 @@ Lottery.Game.prototype = {
 		this.game.physics.arcade.overlap(bulletgroup, layer, bulletKill, null, this);
 		this.game.physics.arcade.collide(baddies, layer);//COLLIDE
 		this.game.physics.arcade.collide(player.sprite, layer);
-		gameover = this.game.physics.arcade.overlap(baddies, player.sprite, player.kill, null, player);
+		if(!teleporting)
+			gameover = this.game.physics.arcade.overlap(baddies, player.sprite, player.kill, null, player);
 		
 		if(gameover)
 		{
@@ -150,6 +152,7 @@ Lottery.Game.prototype = {
 		}
 		if(this.game.time.now-portMark > 1750)
 		{
+			teleport = true;
 			teleport(this.game);
 			portMark = this.game.time.now+this.game.rnd.integerInRange(-1000, 2500);
 		}
@@ -158,6 +161,7 @@ Lottery.Game.prototype = {
 		{
 			timeMark = this.game.time.now;
 			dirFlag = false;
+			teleporting = false;
 		}
 		if(baddies.countLiving() <= 0 || player.getShots() <= 0)
 		{

@@ -1,4 +1,4 @@
-Dishes.Preloader = function (game) {
+Lottery.Preloader = function (game) {
 
 	this.background = null;
 	this.preloadBar = null;
@@ -8,21 +8,33 @@ Dishes.Preloader = function (game) {
 
 };
 
-Dishes.Preloader.prototype = {
+Lottery.Preloader.prototype = {
 
 	preload: function () {
 
 		this.ready = false;
+		//	These are the assets we loaded in Boot.js
+		//	A nice sparkly background and a loading progress bar
+		//this.background = this.add.sprite(300, 400, 'preloaderBarBackground');
+		//this.preloadBar = this.add.sprite(300, 400, 'preloaderBar');
+		//this.foreground = this.add.sprite(300, 400, 'preloaderBarForeground');
+
+		//	This sets the preloadBar sprite as a loader sprite.
+		//	What that does is automatically crop the sprite from 0 to full-width
+		//	as the files below are loaded in.
+		//this.load.setPreloadSprite(this.preloadBar);
+
+		//	Here we load the rest of the assets our game needs.
 		//this.load.spritesheet('button', 'assets/flixel-button.png', 80, 20);
-		this.load.tilemap('map', 'assets/IndirectSim.json', null, Phaser.Tilemap.TILED_JSON);
+		this.load.tilemap('map', 'assets/LotteryShooterTest.json', null, Phaser.Tilemap.TILED_JSON);
 		this.load.image('greenBlock', 'assets/greenBlock_32x32.png');
 		//this.load.image('purpleBlock', 'assets/purpleBlock_32x32.png');
-		this.load.image('redBlock', 'assets/redBlock_32x32.png');
+		//this.load.image('redBlock', 'assets/redBlock_32x32.png');
 		this.load.image('yellowBlock', 'assets/yellowBlock_32x32.png');
 		this.load.image('blueBlock', 'assets/blueBlock_32x32.png');
-		//this.load.image('inactive', 'assets/greenRect_64x32.png');
-		//this.load.image('active', 'assets/redRect_64x32.png');
-		this.load.spritesheet('textfield', 'assets/buttonSheet.png', 64, 32);
+		//this.load.image('orangeBlock', 'assets/orangeBlock_32x32.png');
+		this.load.image('purpleShot', 'assets/purple_ball.png');
+		this.load.image('pointTile', 'assets/red_ball_32x32.png');
 	},
 
 	create: function () {

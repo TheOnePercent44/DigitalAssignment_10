@@ -1,4 +1,4 @@
-Dishes.LoseScreen = function (game) {
+Lottery.WinScreen = function (game) {
 	this.game;      //  a reference to the currently running game (Phaser.Game)
     this.add;       //  used to add sprites, text, groups, etc (Phaser.GameObjectFactory)
     this.camera;    //  a reference to the game camera (Phaser.Camera)
@@ -17,9 +17,10 @@ Dishes.LoseScreen = function (game) {
     this.rnd;       //  the repeatable random number generator (Phaser.RandomDataGenerator)
 };
 
-Dishes.LoseScreen.prototype = {
+Lottery.WinScreen.prototype = {
+
 	create: function () {
-		var text = this.game.add.text(this.game.camera.width*0.05, this.game.camera.height*0.4, "The Government Captured You!", { font: "55px Arial", fill: "#FFFFFF", align: "center" });
+		var text = this.game.add.text(this.game.camera.width*0.25, this.game.camera.height*0.4, "Congratulations You Escaped!", { font: "60px Arial", fill: "#FFFFFF", align: "center" });
 		this.game.add.text(this.game.camera.width*0.30, this.game.camera.height*0.5, "(Click to Return to the Menu)", { font: "30px Arial", fill: "#FFFFFF", align: "center" });
 	},
 

@@ -248,7 +248,7 @@ function repulse(game)
 
 function pushback(enemysprite)
 {
-	if(abs(enemysprite.x-player.sprite.x) < 150 || abs(enemysprite.y-player.sprite.y) < 150)
+	if(Math.difference(enemysprite.x, player.sprite.x) < 150 || Math.difference(enemysprite.y, player.sprite.y) < 150)
 	{
 		var angle = -anglebetween(enemysprite.x, enemysprite.y, player.sprite.x, player.sprite.y);
 		enemysprite.body.velocity.x = ENEMYSPEED*Math.cos(angle);

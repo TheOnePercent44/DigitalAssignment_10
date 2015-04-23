@@ -79,6 +79,7 @@ Lottery.Game.prototype = {
 	///////////////////////////////////////////////////////////////////////////////////////////////////	
 		timeMark = this.game.time.now;
 		portMark = this.game.time.now;
+		baddies.forEachAlive(repulse, this);//begin with repulse to make fair
     },
 
     update: function () {

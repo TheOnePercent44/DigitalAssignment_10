@@ -68,7 +68,7 @@ Lottery.Game.prototype = {
 		
 		baddies = this.game.add.group();
 		baddies.enableBody = true;
-		for(var i = 0; i < 10; i++)//25 enemies randomly on the map somewhere
+		for(var i = 0; i < 7; i++)//25 enemies randomly on the map somewhere
 		{
 			baddies.add(newEnemy(this.game));
 		}

@@ -99,7 +99,7 @@ Lottery.Game.prototype = {
 		if(spaceKey.isDown && canRepulse === true)
 		{
 			canRepulse = false;
-			baddies.forEachAlive(repulse, this);
+			baddies.forEachAlive(repulse, this.game);
 			repulseCD = this.game.time.now;
 		}
 		if(canRepulse === false && this.game.time.now-repulseCD > 3000)

@@ -175,7 +175,7 @@ Lottery.Game.prototype = {
 			timeMark = this.game.time.now;
 			dirFlag = false;
 		}
-		if(baddies.countLiving() <= 0 || player.getShots() <= 0)
+		if(baddies.countLiving() <= 0 || player.getShots() <= 0 || player.isDead === true)
 		{
 			//this.state.start('WinScreen');
 			var score = 30+(player.getShots()*2)-baddies.countLiving();

@@ -99,7 +99,7 @@ Lottery.Game.prototype = {
 		if(spaceKey.isDown && canRepulse === true)
 		{
 			canRepulse = false;
-			repulse(this.game);
+			baddies.foreachalive(repulse, this);
 			repulseCD = this.game.time.now;
 		}
 		if(canRepulse === false && this.game.time.now-repulseCD > 3000)
@@ -241,12 +241,7 @@ function EnemyUpdate(enemysprite, game)
 	}
 };
 
-function repulse(game)
-{
-	baddies.forEachAlive(pushback, game);
-}
-
-function pushback(enemysprite)
+function repulse(enemysprite)
 {
 	if(this.difference(enemysprite.x, player.sprite.x) < 150 || this.difference(enemysprite.y, player.sprite.y) < 150)
 	{
@@ -254,7 +249,7 @@ function pushback(enemysprite)
 		enemysprite.body.velocity.x = ENEMYSPEED*Math.cos(angle);
 		enemysprite.body.velocity.y = ENEMYSPEED*Math.sin(angle);
 	}
-}
+};
 
 function teleport(game)
 {

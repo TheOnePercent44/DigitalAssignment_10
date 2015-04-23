@@ -11,6 +11,7 @@ function newPlayer(game, xcoord, ycoord)
 	this.sprite.body.collideWorldBounds = true;
 	this.sprite.body.maxVelocity.setTo(this.MAX_SPEED, 0); // x, y
 	this.sprite.body.drag.setTo(this.DRAG, 0); // x, y
+	this.isDead = false;
 	//this.inAir = false;
     //this.JUMP_SPEED = -175; // pixels/second (negative y is up)
 	
@@ -86,6 +87,7 @@ function newPlayer(game, xcoord, ycoord)
 	{
 		//enemysprite.kill();
 		this.sprite.kill();
+		player.isDead = true;
 	}
 	
 	return this;

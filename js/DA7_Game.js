@@ -245,7 +245,7 @@ function repulse(enemysprite)
 {
 	if(this.game.math.distance(enemysprite.x, enemysprite.y, player.sprite.x, player.sprite.y) < 150)
 	{
-		var angle = -angleBetween(enemysprite.x, enemysprite.y, player.sprite.x, player.sprite.y);
+		var angle = -this.game.math.angleBetween(enemysprite.x, enemysprite.y, player.sprite.x, player.sprite.y);
 		enemysprite.body.velocity.x = ENEMYSPEED*Math.cos(angle);
 		enemysprite.body.velocity.y = ENEMYSPEED*Math.sin(angle);
 	}

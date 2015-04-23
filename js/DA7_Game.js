@@ -178,7 +178,7 @@ Lottery.Game.prototype = {
 		if(baddies.countLiving() <= 0 || player.getShots() <= 0)
 		{
 			//this.state.start('WinScreen');
-			var score = 30+player.getShots()-baddies.countLiving();
+			var score = 30+(player.getShots()*2)-baddies.countLiving();
 			var text = this.game.add.text(704/4, 704/4, "GAME OVER\nScore: "+score, { font: "65px Arial", fill: "#ff0044", align: "center" });
 		}
     },

@@ -254,6 +254,8 @@ function repulse(enemysprite)
 function teleport(game)
 {
 	index = game.rnd.integerInRange(1, LOCS)-1;
+	player.sprite.body.velocity.x = 0;
+	player.sprite.body.velocity.y = 0;
 	player.sprite.x = xlocs[index];
 	player.sprite.y = ylocs[index];
 	while(game.physics.arcade.overlap(player, baddies))//game.physics.arcade.collide(hume, layer) || 
